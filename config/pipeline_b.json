@@ -1,0 +1,13 @@
+{
+  "name": "B_candidate",
+  "collection": "rag_b_candidate",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunker_version": "fixed-words-v1",
+  "chunk_words": 50,
+  "chunk_overlap_words": 0,
+  "top_k": 5,
+  "candidate_k": 20,
+  "reranker": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "answer_style": "explain",
+  "generator_model": "gpt-4o-mini-2024-07-18"
+}

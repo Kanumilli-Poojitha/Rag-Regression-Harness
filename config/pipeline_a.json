@@ -1,0 +1,13 @@
+{
+  "name": "A_baseline",
+  "collection": "rag_a_baseline",
+  "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+  "chunker_version": "fixed-words-v1",
+  "chunk_words": 50,
+  "chunk_overlap_words": 0,
+  "top_k": 2,
+  "candidate_k": 2,
+  "reranker": null,
+  "answer_style": "strict",
+  "generator_model": "gpt-4o-mini-2024-07-18"
+}
