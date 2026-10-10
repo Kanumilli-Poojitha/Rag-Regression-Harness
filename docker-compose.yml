@@ -1,0 +1,30 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.4
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    healthcheck:
+      # qdrant image has no curl; bash /dev/tcp works on the stock image
+      test: ["CMD-SHELL", "bash -c ':> /dev/tcp/127.0.0.1/6333' || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  harness:
+    build: .
+    depends_on:
+      qdrant:
+        condition: service_healthy
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:?copy .env.example to .env and set OPENAI_API_KEY}
+      QDRANT_URL: http://qdrant:6333
+    volumes:
+      - .:/app
+      - hf_cache:/models
+
+volumes:
+  qdrant_storage:
+  hf_cache:
